@@ -10,7 +10,7 @@ with open(os.path.join('input','usa-2016-presidential-election-by-county.json'))
     data = json.load(f)
 ```
 
-The level of information available is amazing, from demographics to economical data to the geometry of each county.
+The level of information available is amazing, from demographics to economic data to the geometry of each county.
 Because Alaska reports its election result by precinct instead of by county, the NYT (and therefore the OpenData dataset) did not include county-level data for Alaska (but we still have demographic and geometry information available). Fortunately, at [rrhelections.com](https://rrhelections.com/index.php/2018/02/02/alaska-results-by-county-equivalent-1960-2016/) they repackaged the data into county-level data. I downloaded the zip file at that link and exported separate 2008-2016 sheets to csv to easily import as pandas dataframes. For example, here is the 2016 dataframe, of which we select the relevant columns
 ```python
 akdf = pd.read_csv(os.path.join('input','Alaska2016.csv'))
@@ -29,7 +29,7 @@ us_df = gpd.GeoDataFrame.from_file(os.path.join('input',"State_2010Census_DP1.db
 us_df = us_df.sort_values('NAME10')
 us_df = us_df.reset_index(drop=True )
 ```
-Each state border can be very intricate as it can include tens of minor islands, which we are not interested in. For each state, I define a main border by taking the polygon enclosing the largest surface area (except for Hawaii, for which I would only get one islands, and the state would not be recognizable on a map). I also shift Hawaii and Alaska so they can be displayed near the continental United States; note that Alaska is also rescaled down because it would otherwise be huge. The source code and the resulting borders are as follows:   
+Each state border can be very intricate as it can include tens of minor islands, which we are not interested in. For each state, I define a main border by taking the polygon enclosing the largest surface area (except for Hawaii, for which I would only get one island, and the state would not be recognizable on a map). I also shift Hawaii and Alaska so they can be displayed near the continental United States; note that Alaska is also rescaled down because it would otherwise be huge. The source code and the resulting borders are as follows:   
 ```python
 state_border = {}
 minor_borders = {}
@@ -55,7 +55,7 @@ for st,borders in us_df[['STUSPS10','geometry']].itertuples(index=False):
 
     axes[0].plot(*state_border[st])
     for pol in minor_borders[st]:
-        axes[1].plot(np.mod(pol[0],-360),pol[1]) # keep togethere AK smaller islands that go around date change line
+        axes[1].plot(np.mod(pol[0],-360),pol[1]) # keep together AK smaller islands that go around date change line
 ```
 ![main and minor state borders](figs/states_main_minor.png)
 
@@ -66,7 +66,7 @@ def col_alpha_rescale(percentD,percentR):
     alpha = min(max(0.2 + (np.abs(percentD-percentR)/0.4),0),1)
     return  (red, 0, blue,alpha)
 ```
-which returns a RGBA specification as wanted. Given the state borders defined above, and the county level borders included in `data`, we can plot with matplotlib (using Basemap to project into the standard US Albers equal area projection):
+which returns a RGBA specification as wanted. Given the state borders defined above, and the county level borders included in `data`, we can plot with matplotlib (using Basemap to project into the standard US projection - Albers equal area):
 ```python
 themap = Basemap(epsg=2163, llcrnrlon=-130, llcrnrlat=24, urcrnrlon=-65, urcrnrlat=50)
 fig, ax = plt.subplots(1,1,figsize=(12,7.5))
@@ -84,8 +84,7 @@ ax.set_axis_off()
 
 One can similarly get state-level election results. In this way I get the following maps for the 2016 elections:
 
-<img src="figs/election_state_map16.png" alt="2016 US state map" style="max-width:800px;width:49%;">
-<img src="figs/election_county_map16.png" alt="2016 US county map" style="max-width:800px;width:49%;">
+<img src="figs/election_state_map16.png" alt="2016 US state map" width="49%"> <img src="figs/election_county_map16.png" alt="2016 US county map" width="49%">
 
 There it is in full glory! One interesting feature is that the county-level margins are more extreme than state-level ones. Political bubbles are ubiquitous.   
 These maps can be compared to previous elections, to understand the difference between the last election and the Obama 2008 and 2012 elections:
@@ -96,7 +95,7 @@ These maps can be compared to previous elections, to understand the difference b
 Even though Hillary Clinton won the popular vote, one easily sees that a bunch of states from Pennsylvania to the Midwest were flipped (the so-called Blue Wall).
 
 # Cartograms: reflecting where people actually live
-Looking at the county-level figures, one would wonder how  it was ever possible for Democrats to win any election, given that most of the US looks very red/Republican. The simple answer is that very few people live in those large swaths of red. For example, see the distribution of vote margins by county, vs by vote total.
+Looking at the county-level figures, one would wonder how  it was ever possible for Democrats to win any election, given that most of the US looks very red/Republican. The simple answer is that very few people live in those large swaths of red.  For example, see the distribution of vote margins by county, vs by vote total.
 
 ![](figs/dist_margin_by_county_state.png)
 
@@ -120,13 +119,13 @@ for idx in counties_borders.keys():
 
 The resulting maps are the following:
 
-<img src="figs/election_state_map_carto16.png" alt="2016 US state map" style="max-width:1000px;width:95%;">
+<img src="figs/election_state_map_carto16.png" alt="2016 US state map" width="95%">
 
-<img src="figs/election_county_map_carto.png" alt="2016 US county map" style="max-width:1000px;width:95%;">
+<img src="figs/election_county_map_carto.png" alt="2016 US county map" width="95%">
 
 Note that this can be done at the state-level (top: changing the shape of the whole state assuming constant density inside) or at the county level (bottom). A simple difference in the result can be noted in the shape of NY state: at the state-level, it increases in size while roughly maintaining its shape, because the effect of NYC gets distributed over the whole state. On the other hand, at the county-level New York City and the surrounding areas (for example Long Island) get blown up while most of New York State shrinks to nothing. The same happens to California with Los Angeles, San Diego and the Bay Area.
 
-By looking at the last figure, it is easier to understand how Democrats won the popular vote: they win elections where more people live!
+By looking at the last figure, it is easier to understand how Democrats won the popular vote: they win elections where more people live! After all, *it is the people that vote, not the land*.
 
 Again, one can compare the 2016 election to the previous two election cycles, but looking at the cartograms instead of the physical US map:
 
@@ -148,13 +147,12 @@ Here the shading is relatively unimportant, as most states are winner-take-all.
 In the US-wide maps above, details for each state are mostly too small to discern. I can take each state individually and make a population cartogram that will show the internal shifting of counties. To make maps more recognizable, I also overlay interstate highways (from the US census [TIGER dataset](http://www2.census.gov/geo/tiger/TIGER2016/PRIMARYROADS/tl_2016_us_primaryroads.zip)).   
 I found that the most logical combination of plots is to show the election results on the standard map, the population density and then the cartogram. Plots for each state are saved in the [figs/state_maps/](figs/state_maps/) subdirectory. Here are some samples:
 
-<img src="figs/state_maps/election_county_16_CA.png" alt="2016 US state map" style="max-width:500px;width:33%;">
-<img src="figs/state_maps/election_county_16_GA.png" alt="2016 US county map" style="max-width:500px;width:33%;">
-<img src="figs/state_maps/election_county_16_OK.png" alt="2016 US county map" style="max-width:500px;width:33%;">
-<div>
-<img src="figs/state_maps/election_county_16_NY.png" alt="2016 US county map" style="max-width:500px;width:33%;">
-<img src="figs/state_maps/election_county_16_TX.png" alt="2016 US county map" style="max-width:500px;width:33%;">
-<img src="figs/state_maps/election_county_16_VA.png" alt="2016 US county map" style="max-width:500px;width:33%;">
+
+<img src="figs/state_maps/election_county_16_CA.png" alt="2016 US state map"  width="33%"><img src="figs/state_maps/election_county_16_GA.png" alt="2016 US county map" width="33%">
+
+<img src="figs/state_maps/election_county_16_OK.png" alt="2016 US county map" width="33%"><img src="figs/state_maps/election_county_16_NY.png" alt="2016 US county map" width="33%">
+
+<img src="figs/state_maps/election_county_16_TX.png" alt="2016 US county map" width="33%"><img src="figs/state_maps/election_county_16_VA.png" alt="2016 US county map" width="33%">
 
 # Looking into demographics
 
@@ -170,11 +168,11 @@ Before jumping to conclusions, we can look for correlation in these variables:
 
 ![](figs/scatter_demo_by_white.png)
 
-There is definitely a correlation between population density, white %, and democratic vote. For example the aforementioned limit of 40% in whiteness also shows as a limit on population density: it is extremely hard for republicans to win any county with population densities above 1000 people per square mile. On the other hand there are also diverse sparsely populated areas that consistently vote democrat, but they are mostly non-white
+There is definitely a correlation between population density, white %, and democratic vote. For example the aforementioned limit of 40% in whiteness also shows as a limit on population density: it is extremely hard for republicans to win any county with population densities above 1000 people per square mile. On the other hand there are also diverse sparsely populated areas that consistently vote democrat, but they are mostly non-white.
 
 Remembering the old mantra that correlation does not imply causation, it would seem hard to assert (based on data) that whiteness is a deciding factor in voting republican. On the other hand, given the positions of the republican party on minorities, it is still plausible, and the data shows that in *minority-majority* places, democrats have the upper hand.
 
-Finally, we can compare the 2016 election to previous presidential elections. The simplest measure is the percent *shift*, that is, the difference between the margins in the various elections.
+Finally, we can compare the 2016 election to previous presidential elections. The simplest measure is the percent *shift*, that is, the difference between the margins in the various elections. The blue/red colors are still based on the 2018 results.
 
 ![](figs/scatter_shifts_by_demo.png)
 
