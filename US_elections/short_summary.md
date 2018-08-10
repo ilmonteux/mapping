@@ -148,11 +148,11 @@ In the US-wide maps above, details for each state are mostly too small to discer
 I found that the most logical combination of plots is to show the election results on the standard map, the population density and then the cartogram. Plots for each state are saved in the [figs/state_maps/](figs/state_maps/) subdirectory. Here are some samples:
 
 
-<img src="figs/state_maps/election_county_16_CA.png" alt="2016 US state map"  width="33%"><img src="figs/state_maps/election_county_16_GA.png" alt="2016 US county map" width="33%">
+<img src="figs/state_maps/election_county_16_CA.png" alt="2016 US state map"  width="45%"><img src="figs/state_maps/election_county_16_GA.png" alt="2016 US county map" width="45%">
 
-<img src="figs/state_maps/election_county_16_OK.png" alt="2016 US county map" width="33%"><img src="figs/state_maps/election_county_16_NY.png" alt="2016 US county map" width="33%">
+<img src="figs/state_maps/election_county_16_OK.png" alt="2016 US county map" width="45%"><img src="figs/state_maps/election_county_16_NY.png" alt="2016 US county map" width="45%">
 
-<img src="figs/state_maps/election_county_16_TX.png" alt="2016 US county map" width="33%"><img src="figs/state_maps/election_county_16_VA.png" alt="2016 US county map" width="33%">
+<img src="figs/state_maps/election_county_16_TX.png" alt="2016 US county map" width="45%"><img src="figs/state_maps/election_county_16_VA.png" alt="2016 US county map" width="45%">
 
 # Looking into demographics
 
