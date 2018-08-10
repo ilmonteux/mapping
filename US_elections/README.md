@@ -3,8 +3,10 @@
 A short foray into data visualization, mapping and cartogramming, using the US presidential elections results.   
 In addition to plotting the election results in the blue/red scheme at the state or county level, I create a cartogram, that is a morphed map where the **size** of each state or county is based on its population.
 
-Here is the money plot for the 2016 elections:   
+Here is a sample of visualizations for the 2016 elections:   
 ![county level map and cartogram](figs/election_county_map_carto.png)
+
+<img src="figs/state_maps/election_county_16_CA.png" alt="2016 US state map"  width="33%"><img src="figs/state_maps/election_county_16_CO.png" alt="2016 US state map"  width="33%"><img src="figs/state_maps/election_county_16_NY.png" alt="2016 US state map"  width="33%">
 
 You can find more plots in the walkthrough [short_summary.md](short_summary.md), including state-level results, comparisons to the 2008 and 2012 elections, zoomed single-state cartograms and exploration of correlations between voting and demographics. The analysis is done in two Jupyter python notebooks:
 - [election_maps.ipynb](election_maps.ipynb) for generating the maps and the cartograms.
