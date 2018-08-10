@@ -4,7 +4,7 @@ A short foray into data visualization, mapping and cartogramming, using the US p
 In addition to plotting the election results in the blue/red scheme at the state or county level, I create a cartogram, that is a morphed map where the **size** of each state or county is based on its population.
 
 Here is a sample of visualizations for the 2016 elections:   
-![county level map and cartogram](figs/election_county_map_carto.png)
+![county level map and cartogram](https://raw.githubusercontent.com/ilmonteux/mapping/master/US_elections/figs/election_county_map_carto.png)
 
 <img src="figs/state_maps/election_county_16_CA.png" alt="2016 US state map"  width="33%"><img src="figs/state_maps/election_county_16_CO.png" alt="2016 US state map"  width="33%"><img src="figs/state_maps/election_county_16_NY.png" alt="2016 US state map"  width="33%">
 
