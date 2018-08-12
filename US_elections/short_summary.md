@@ -94,6 +94,11 @@ These maps can be compared to previous elections, to understand the difference b
 
 Even though Hillary Clinton won the popular vote, one easily sees that a bunch of states from Pennsylvania to the Midwest were flipped (the so-called Blue Wall).
 
+Finally we can look at the percent shift in votes from  the previous elections (note the smaller range in the color map):    
+![2008-2012-2016 US state map vote shift](figs/election_county_map081216_shift.png)
+
+Here a couple of states, Alaska and Utah look weird: those are artifacts of Palin being on the ticket in 2008 (moving up the baseline when comparing to 2012) and of McMullin running as independent in 2016 (taking away R votes in Utah).
+
 # Cartograms: reflecting where people actually live
 Looking at the county-level figures, one would wonder how  it was ever possible for Democrats to win any election, given that most of the US looks very red/Republican. The simple answer is that very few people live in those large swaths of red.  For example, see the distribution of vote margins by county, vs by vote total.
 
