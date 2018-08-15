@@ -13,12 +13,13 @@ The work is done in the following python Jupyter notebooks:
 <img src="figs/first_kronomap_interpolated.png" alt="LA isochrone"  width="49%">
 
 - [us_kronomap.ipynb](us_kronomap.ipynb): compute isochrones for the whole United States, starting from the geographic center of the contiguous US (which is near Lebanon, Kansas). Then generate a kronomap of the US (below, right), where points along each circle are at fixed travel times from the center     
-<img src="figs/us_center_interpolated.png" alt="US center isochrone"  width="49%"><img src="figs/us_center_morphed_smooth_bw.png" alt="US center kronomap"  width="49%">
+<img src="figs/us_center_interpolated_states_roads.png" alt="US center isochrone"  width="43%"><img src="figs/us_center_morphed.png" alt="US center kronomap"  width="49%">
 
-The concept of the **kronomap** is better shown via an animation where one smoothly transitions between the standard latitude/longitude map and the kronomap:
+The concept of the **kronomap** is better illustrated via an animation where one smoothly transitions between the standard latitude/longitude map and the kronomap:
 
 ![US center animation](animations/us_morphing.gif)
 
+By definition, same travel-time contours on the kronomap are circles around the starting point.
 
 A walkthrough of the Jupyter notebooks, with many more intermediate plots, is provided in [short_summary.md](short_summary.md).
 
