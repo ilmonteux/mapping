@@ -31,9 +31,9 @@ The work is done in the following python Jupyter notebooks:
 
 - [chronomaps.ipynb](chronomaps.ipynb): load the travel time grids to first draw isochrones and then chronomaps around each of the same cities. The resulting figures are as follow (here I compare standard maps to chronomaps):    
 
-<img src="figs/travel_times_Irvine.png" alt="LA isochrone"  width="42%"><img src="figs/chronomap_Irvine.png" alt="LA chronomap"  width="41%">
+    <img src="figs/travel_times_Irvine.png" alt="LA isochrone"  width="42%"><img src="figs/chronomap_Irvine.png" alt="LA chronomap"  width="41%">
 
-<img src="figs/travel_times_NY.png" alt="NY isochrone"  width="45%"><img src="figs/chronomap_NY.png" alt="NY chronomap"  width="41%">
+    <img src="figs/travel_times_NY.png" alt="NY isochrone"  width="45%"><img src="figs/chronomap_NY.png" alt="NY chronomap"  width="41%">
 
 By construction, the isochrones (points at a fixed travel time from the origin point) on a chronomap are circles around the origin.
 
