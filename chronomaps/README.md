@@ -12,7 +12,7 @@ A different kind of map would be one where a segment length on the map reflects 
 ![Animation Irvine](animations/animation_Irvine.gif)
 
 
-All the required code (in Python) is provided and anyone is welcome to use it as they wish. A detailed walkthrough of the Jupyter notebooks, with many more intermediate plots, is provided at [ilmonteux.github.io/chronomaps](ilmonteux.github.io/chronomaps). If you do something with this work and publish it (on GitHub or elsewhere), I would be glad to know, so send me a note.
+All the required code (in Python) is provided and anyone is welcome to use it as they wish. A detailed walkthrough of the Jupyter notebooks, with many more intermediate plots, is provided at [ilmonteux.github.io/chronomaps](https://ilmonteux.github.io/chronomaps). If you do something with this work and publish it (on GitHub or elsewhere), I would be glad to know, so send me a note.
 
 
 
