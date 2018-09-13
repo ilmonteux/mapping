@@ -9,8 +9,10 @@ But for the most part, people do not care about *distances* as much as they care
 
 A different kind of map would be one where a segment length on the map reflects travel times instead of distances. I called this tye of map a **chronomap** (from *chronos*=time). In this project, I developed this concept and applied it to several cities across the United States. See here an animation of a transition between a normal map and the corresponding chronomap:
 
-<img src="animations/us_morphing_old.gif" alt="US center chronomap"  width="49%">
-**replace with LA or NY animation**
+<video width="480" height="320" controls="controls">
+  <source src="animations/animation_Irvine.mp4" type="video/mp4">
+</video>
+
 
 All the required code (in Python) is provided and anyone is welcome to use it as they wish. A detailed walkthrough of the Jupyter notebooks, with many more intermediate plots, is provided at [ilmonteux.github.io/chronomaps](ilmonteux.github.io/chronomaps). If you do something with this work and publish it (on GitHub or elsewhere), I would be glad to know, so send me a note.
 
@@ -27,7 +29,7 @@ Then, I made what I called ***chronomaps***, that is, maps where the radial dist
 
 The work is done in the following python Jupyter notebooks:
 
-- [travel times.ipynb](travel times.ipynb): call Google Maps API to compute travel times around a given location. In the notebook we first generate travel time grids around Irvine, CA, and then in a batch run around a hand-picked set of US cities (San Francisco, Seattle, Denver, Chicago, Washington DC, New York). Here I draw isochrones on top of map backgrounds from the ArcGIS ESRI service.
+- [travel times.ipynb](travel%20times.ipynb): call Google Maps API to compute travel times around a given location. In the notebook we first generate travel time grids around Irvine, CA, and then in a batch run around a hand-picked set of US cities (San Francisco, Seattle, Denver, Chicago, Washington DC, New York). Here I draw isochrones on top of map backgrounds from the ArcGIS ESRI service.
 
 - [chronomaps.ipynb](chronomaps.ipynb): load the travel time grids to first draw isochrones and then chronomaps around each of the same cities. The resulting figures are as follow (here I compare standard maps to chronomaps):    
 <img src="figs/travel_times_Irvine.png" alt="LA isochrone"  width="49%">
@@ -44,9 +46,8 @@ By construction, the isochrones (points at a fixed travel time from the origin p
 	- Los Angeles, CA
 	- The geographic center of the contiguous US (which is near Lebanon, Kansas).   
 	 
-> figures coming soon
+    > notebook and figures coming soon
 
-A detailed walkthrough of the Jupyter notebooks, with many more intermediate plots, is provided on [github.io](ilmonteux.github.io/chronomaps).
 
 
 ### Prerequisites
