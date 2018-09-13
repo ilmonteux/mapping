@@ -1,21 +1,22 @@
 # Mapping US Elections
 
-A short foray into data visualization, mapping and cartogramming, using the US presidential elections results.   
+A short foray into data visualization, mapping and cartogramming, using the US presidential elections results.     
 In addition to plotting the election results in the blue/red scheme at the state or county level, I create a cartogram, that is a morphed map where the **size** of each state or county is based on its population.
+
+Head to the [github.io page](https://ilmonteux.github.io/cartograms/) for details and a tutorial.
 
 Here is a sample of visualizations for the 2016 elections:   
 ![county level map and cartogram](https://raw.githubusercontent.com/ilmonteux/mapping/master/US_elections/figs/election_county_map_carto.png)
 
 <img src="figs/state_maps/election_county_16_CA.png" alt="2016 US state map"  width="33%"><img src="figs/state_maps/election_county_16_CO.png" alt="2016 US state map"  width="33%"><img src="figs/state_maps/election_county_16_NY.png" alt="2016 US state map"  width="33%">
 
-You can find more plots in the walkthrough [short_summary.md](short_summary.md), including state-level results, comparisons to the 2008 and 2012 elections, zoomed single-state cartograms and exploration of correlations between voting and demographics. The analysis is done in two Jupyter python notebooks:
+You can find more plots in the [github.io page](https://ilmonteux.github.io/cartograms/), including state-level results, comparisons to the 2008 and 2012 elections, zoomed single-state cartograms and exploration of correlations between voting and demographics. The analysis is done in two Jupyter python notebooks:
 - [election_maps.ipynb](election_maps.ipynb) for generating the maps and the cartograms.
 - [demographics.ipynb](demographics.ipynb) for analysis of voting patterns and correlations with demographics.
 
 
 ## Getting Started
-Amazingly, there exist no central government source where to download election results from.   
-The raw county-level election data was downloaded from  [OpenDataSoft](http://data.opendatasoft.com/explore/dataset/usa-2016-presidential-election-by-county@public/), which repackaged data first created on GitHub by [Deleetdk](https://github.com/Deleetdk/USA.county.data), which in turns scraped the New York Times website.   
+Amazingly, there exist no central government source from which to download election results. The raw county-level election data was downloaded from  [OpenDataSoft](http://data.opendatasoft.com/explore/dataset/usa-2016-presidential-election-by-county@public/), which repackaged data first created on GitHub by [Deleetdk](https://github.com/Deleetdk/USA.county.data), which in turns scraped the New York Times website.   
 The dataset was missing Alaska results, but fortunately the people at [rrhelections.com](https://rrhelections.com/index.php/2018/02/02/alaska-results-by-county-equivalent-1960-2016/)  repackaged the precinct-level data into county-level data.
 
 State-level maps were downloaded from the US Census Bureau, but are also included in the `input` directory as they are not too big.
