@@ -39,12 +39,12 @@ By construction, the isochrones (points at a fixed travel time from the origin p
 
 - [us_chronomap.ipynb](us_chronomap.ipynb): compute isochrones and chronomaps for the whole (continental) United States, starting from three points:
 
-	- New York City, NY
 	- Los Angeles, CA
-	- The geographic center of the contiguous US (which is near Lebanon, Kansas).   
-	 
-    > notebook and figures coming soon
-
+	 ![United States chronomap from Los Angeles](figs/chronomap_US_from_LA_combined.png)
+	- New York City, NY
+	 ![United States chronomap from Los Angeles](figs/chronomap_US_from_NY_combined.png)
+	- The geographic center of the contiguous US (near Lebanon, Kansas).
+	 ![United States chronomap from Los Angeles](figs/chronomap_US_from_center_combined.png)
 
 
 ### Prerequisites
