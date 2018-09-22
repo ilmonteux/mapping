@@ -2,11 +2,16 @@ import urllib2
 import ConfigParser
 try: import simplejson as json
 except ImportError: import json
+
 from math import cos, sin, tan, sqrt, pi, radians, degrees, asin, atan2
 import matplotlib as mpl
+import matplotlib.pyplot as plt
+from mpl_toolkits.basemap import Basemap
 import numpy as np
 
-# define 
+
+
+# define global variables and general-purpose functions
 flag_miles = True
 flag_meters = not flag_miles
 miles_to_meters = 1609.34
@@ -30,6 +35,12 @@ def sec_to_hms(t):
 
 def flatten(l): return [ el for sublist in l for el in sublist]
 def flatten_all(l): return flatten(l[0]) + (flatten(l[1:]) if len(l) > 1 else []) if type(l) is list else [l]
+
+
+
+
+
+
 
 def call_Gmaps_coords_from_address(address, config_file='gmaps_config.cfg', verbose = False):
     """
@@ -267,6 +278,69 @@ def lighten_color(color, amount=0.5):
     return colorsys.hls_to_rgb(c[0], 1 - amount * (1 - c[1]), c[2])
 
 
+def grid_is_land(grid, themap='', resolution='l'):
+    """Given a list of (lat,lon) points, return only the points that are on land, 
+    according to the GSHHG shoreline database. A Basemap projection map can be specified as input.
+    If it is not, it will build the Basemap from the input grid. In that case, the resolution
+    level can be specified as input ('l'=low,'i'=intermediate,'h'=high,'f'=full, where usually
+    intermediate is good enough, for maps that span less than ~100 miles 'h' should be used)"""
+    y, x = zip(*grid)
+    if themap == '':
+        themap = Basemap(llcrnrlon=min(x),llcrnrlat=min(y),urcrnrlon=max(x),urcrnrlat=max(y), resolution=resolution)
+    elif not isinstance(themap, Basemap):
+        raise Exception('Input projection map themap is not Basemap instance.')
+    grid_out = [p for p in grid if themap.is_land(p[1],p[0])]
+    return grid_out
+
+def is_in_range(xy, x_range, y_range):
+    """Is the (x,y) point inside a rectangle defined by x_range and y_range?"""
+    return (x_range[0]<xy[0]<x_range[1] and y_range[0]<xy[1]<y_range[1])
 
 
+def make_grid_map(x,y, themap='', service='shadedrelief', xpixels=500, EPSG=2229, **scatter_args):
+    """Overlays a grid of points (passed as x,y for longitude, latitude) on a map, which is by default shaded relief
+    (from www.shadedrelief.com). Can also use arcGIS ESRI map services (e.g. StreetMap_World).
+    The EPSG code defines the map projection (default value here covers Southern California).
+    """
+    fig, ax = plt.subplots(figsize = (6, 6))
+    if themap=='': 
+        themap = Basemap(llcrnrlon=min(x),llcrnrlat=min(y),urcrnrlon=max(x),urcrnrlat=max(y), epsg=EPSG, ax=ax)
+    elif not isinstance(themap, Basemap):
+        raise Exception('Input projection map themap is not Basemap instance.')
+
+    if service == 'shadedrelief': themap.shadedrelief()
+    else: 
+        try: themap.arcgisimage(service=service,xpixels=xpixels, ax=ax)
+        except: themap.arcgisimage(service='World_Street_Map',xpixels=xpixels, ax=ax)
+    xm, ym = themap(x,y)
+    ax.scatter(xm,ym,**scatter_args)
+    if themap=='': return fig, themap
+    else: return fig
+
+
+def mask_outside_polygon(polygon, ax, rebox = 1.1, **patch_args):
+    """
+    Create a patch covering up outside of polygon passed as input.
+    Modified from Thomas Kuhn at https://stackoverflow.com/a/48624202 and Joe Kington at https://stackoverflow.com/a/3320426.
+    """
+    patches = []
+    
+    
+    (x0,x1),(y0,y1) = ax.get_xlim(), ax.get_ylim()
+    # map_edges = np.array([[x0,y0],[x1,y0],[x1,y1],[x0,y1]])
+    # make external box larger than xlim, ylim so that I don't see bounding box
+    xx0,yy0,xx1,yy1 = x0*rebox**np.sign(-x0), y0*rebox**np.sign(-y0), x1*rebox**np.sign(x1), y1*rebox**np.sign(y1)
+    map_edges = np.array([[xx0,yy0],[xx1,yy0],[xx1,yy1],[xx0,yy1]])
+
+    polys = [map_edges]
+    
+    # take input polygon
+    polys.append(polygon )
         
+    ##creating a PathPatch
+    codes = [ [mpl.patches.Path.MOVETO] + [mpl.patches.Path.LINETO for p in p[1:]] for p in polys ]
+    polys_lin = [v for p in polys for v in p]
+    codes_lin = [c for cs in codes for c in cs]
+    patch = mpl.patches.PathPatch(mpl.patches.Path(polys_lin, codes_lin), **patch_args)
+    ax.set(xlim=(x0,x1), ylim=(y0,y1))
+    return patch
