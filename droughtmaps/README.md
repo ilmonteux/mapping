@@ -2,7 +2,7 @@
 
 <img src="US_drought_20181127.png" alt="2016 US state map"  width="70%">
 
-Data visualization of drought conditions in the United States. Head to my [github Pages blog post](https://ilmonteux.github.io/2018/12/03/drought-maps.html) for animations, more details and a tutorial, or to the [Jupyter notebook](drought maps.ipynb) to reproduce the results.
+Data visualization of drought conditions in the United States. Head to my [github Pages blog post](https://ilmonteux.github.io/2018/12/03/drought-maps.html) for animations, more details and a tutorial, or to the [Jupyter notebook](drought%20maps.ipynb) to reproduce the results.
 
 
 
